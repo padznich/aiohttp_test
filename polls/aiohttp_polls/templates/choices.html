@@ -1,0 +1,33 @@
+{% extends "aiohttp_polls/templates/base.html" %}
+{% block title %}Choices List{% endblock %}
+
+{% block content %}
+<table class="col-lg-12">
+    <thead id="head">
+        <tr>
+            <td class="col-md-1 col-xs-3">
+                ID
+            </td>
+            <td class="col-md-1 col-xs-3">
+                Question ID
+            </td>
+            <td class="col-md-1 col-xs-3">
+                Choice Text
+            </td>
+            <td class="col-md-1 col-xs-3">
+                Votes
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rec in choices %}
+            <tr>
+                <td>{{ rec.id }}</td>
+                <td>{{ rec.question_id }}</td>
+                <td>{{ rec.choice_text }}</td>
+                <td>{{ rec.votes }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

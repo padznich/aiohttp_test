@@ -1,0 +1,15 @@
+# FS
+fs_script_path: "/modules/backupers/fs/fs.sh"
+fs_source: "/home/pad /tmp"
+fs_dst: "/backup_fs"
+fs_exclude: "0"
+
+database:
+  drivername: "postgres"
+  host: "localhost"
+  port: "5432"
+  username: "postgres"
+  password: "postgres"
+  database: "polls"
+  minsize: 1
+  maxsize: 1000

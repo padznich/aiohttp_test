@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Base page{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" media="screen" href="{{ app.router.static.url(filename='css/bootstrap.min.css') }}">
+
+    {% block sidebar %}
+    <div class="col-lg-12 col-xs-12">
+        <nav role="navigation" class="col-lg-12">
+            <span class="col-md-1 col-xs-4"><a class="navbar-brand" href="/">Home</a></span>
+            <span class="col-md-1 col-xs-4"><a class="navbar-brand" href="/questions">Questions</a></span>
+            <span class="col-md-1 col-xs-4"><a class="navbar-brand" href="/choices">Choices</a></span>
+        </nav>
+    </div>
+    {% endblock %}
+
+</head>
+<body>
+    <div id="content">
+        <hr/>
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
