@@ -1,10 +1,11 @@
 
 import asyncio
 import os
-import aiohttp_jinja2
-import jinja2
 
+import aiohttp_debugtoolbar
+import aiohttp_jinja2
 from aiohttp import web
+import jinja2
 
 from .routes import setup_routes
 from .db import setup_db
@@ -18,6 +19,7 @@ project_root = os.path.join(os.path.dirname(__file__), "../")
 
 loop = asyncio.get_event_loop()
 app = web.Application(loop=loop)
+aiohttp_debugtoolbar.setup(app)
 
 aiohttp_jinja2.setup(
     app,
