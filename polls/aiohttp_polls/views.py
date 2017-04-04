@@ -3,6 +3,7 @@ import aiohttp_jinja2
 
 from .db import question, choice
 
+
 @aiohttp_jinja2.template('aiohttp_polls/templates/home.html')
 async def index(request):
     return
