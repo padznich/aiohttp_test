@@ -1,27 +1,40 @@
 
+from aiohttp import web
 import aiohttp_jinja2
 
 from .db import question, choice
 
 
-@aiohttp_jinja2.template('aiohttp_polls/templates/home.html')
-async def index(request):
-    return
+class Home(web.View):
+
+    async def get(self):
+        context = {}
+        return aiohttp_jinja2.render_template("home.html",
+                                              self.request,
+                                              context)
 
 
-@aiohttp_jinja2.template('aiohttp_polls/templates/questions.html')
-async def questions_handler(request):
-    questions = []
-    async with request.app['db'].acquire() as conn:
-        async for row in conn.execute(question.select()):
-            questions.append(row)
-    return {'questions': questions}
+class Question(web.View):
+
+    async def get(self):
+        questions = []
+        async with self.request.app["db"].acquire() as conn:
+            async for row in conn.execute(question.select()):
+                questions.append(row)
+        context = {"questions": questions}
+        return aiohttp_jinja2.render_template("questions.html",
+                                              self.request,
+                                              context)
 
 
-@aiohttp_jinja2.template('aiohttp_polls/templates/choices.html')
-async def choices_handler(request):
-    choices = []
-    async with request.app['db'].acquire() as conn:
-        async for row in conn.execute(choice.select()):
-            choices.append(row)
-    return {'choices': choices}
+class Choice(web.View):
+
+    async def get(self):
+        choices = []
+        async with self.request.app["db"].acquire() as conn:
+            async for row in conn.execute(choice.select()):
+                choices.append(row)
+        context = {"choices": choices}
+        return aiohttp_jinja2.render_template("choices.html",
+                                              self.request,
+                                              context)
