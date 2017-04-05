@@ -12,4 +12,9 @@ Setup
 Run
 ---
 
-    gunicorn wsgi:app --bind 0.0.0.0:8080 --worker-class aiohttp.worker.GunicornWebWorker
+    $ gunicorn wsgi:app --bind 0.0.0.0:8080 --worker-class aiohttp.worker.GunicornWebWorker
+
+Testing
+___
+    $ pytest -v
+    $ pytest -v --pep8
