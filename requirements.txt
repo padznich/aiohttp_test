@@ -22,4 +22,5 @@ pytest-pep8==1.0.6
 PyYAML==3.12
 six==1.10.0
 SQLAlchemy==1.1.8
+-e git+https://github.com/aio-libs/sockjs.git@dfc36d4a0d6205e6bccc40a21263b49fbe0e1e0b#egg=sockjs
 yarl==0.10.0
