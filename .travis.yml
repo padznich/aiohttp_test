@@ -8,5 +8,6 @@ services:
   - postgresql
 before_script:
   - psql < polls/sql/init_db.sql -U postgres
+  - psq -d polls < polls/sql/create_tables.sql -U postgres
 # command to run tests
 script: pytest
