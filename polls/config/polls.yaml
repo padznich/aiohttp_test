@@ -3,6 +3,6 @@ database:
   port: "5432"
   user: "postgres"
   password: "postgres"
-  database: "polls"
+  database: "postgres"
 jinja:
  templ_path: "polls/aiohttp_polls/templates/"
