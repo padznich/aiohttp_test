@@ -5,4 +5,4 @@ database:
   password: "postgres"
   database: "postgres"
 jinja:
- templ_path: "polls/aiohttp_polls/templates/"
+ templ_path: "templates/"

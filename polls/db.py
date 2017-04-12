@@ -1,6 +1,9 @@
 
 import sqlalchemy as sa
+from sqlalchemy.orm import sessionmaker
 from aiopg.sa import create_engine
+
+from settings import conf
 
 
 meta = sa.MetaData()
@@ -45,3 +48,13 @@ def setup_db(app):
 
     app.on_startup.append(init_pg)
     app.on_cleanup.append(close_pg)
+
+
+# print(url.URL(**conf.database))
+engine = create_engine(
+    conf.database,
+    echo=False,
+    pool_size=100,
+    max_overflow=200
+)
+Session = sessionmaker(bind=engine, autoflush=False)

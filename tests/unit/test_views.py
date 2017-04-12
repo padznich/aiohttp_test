@@ -1,14 +1,7 @@
-"""Test rendered views"""
+"""Unit Tests"""
 
-import asyncio
-
-import jinja2
-import pytest
-from aiohttp import web
-from aiohttp.test_utils import make_mocked_request
-import aiohttp_jinja2
-
-from ..main import create_app, conf
+from polls.main import create_app
+from settings import conf
 
 
 async def test_home_view(loop, test_client):

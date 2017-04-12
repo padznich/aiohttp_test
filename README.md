@@ -6,8 +6,10 @@ Setup
     - Python 3.5.2
 - virtualenv -p python3 venv
 - (venv) pip install -r requirements.txt
-- sudo -u postgres psql postgres < polls/sql/init_db.sql
-- sudo -u postgres psql postgres -d polls < polls/sql/create_tables.sql
+- sudo -u postgres psql postgres < sql/init_db.sql
+- sudo -u postgres psql postgres -d polls < sql/create_tables.sql
+- config/polls.yaml
+- 
 
 Run
 ---
@@ -16,5 +18,6 @@ Run
 
 Testing
 ___
-    $ pytest -v
-    $ pytest -v --pep8
+    $ pytest tests/unit/*.py
+    $ pytest tests/integration/*.py
+    $ tox -e pep8

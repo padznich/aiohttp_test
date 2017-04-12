@@ -11,7 +11,6 @@ Jinja2==2.9.5
 MarkupSafe==1.0
 multidict==2.1.4
 packaging==16.8
-pep8==1.7.0
 psycopg2==2.7.1
 py==1.4.33
 pyparsing==2.2.0
@@ -22,4 +21,6 @@ pytest-pep8==1.0.6
 PyYAML==3.12
 six==1.10.0
 SQLAlchemy==1.1.8
+SQLAlchemy-Utils==0.32.14
+tox==2.7.0
 yarl==0.10.0

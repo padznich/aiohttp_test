@@ -1,19 +1,16 @@
 
-import os
-
 from aiohttp import web
+import asyncio
 
 from .routes import setup_routes
 from .db import setup_db
 from .jinja_cfg import setup_jinja
-from ..libs.yaml_reader import YamlReader
-
-
-conf_path = os.path.join(os.path.dirname(__file__), "../config/polls.yaml")
-conf = YamlReader(conf_path)
 
 
 def create_app(_conf, loop=None):
+
+    if not loop:
+        loop = asyncio.get_event_loop()
 
     app = web.Application(loop=loop)
 
