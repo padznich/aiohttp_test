@@ -1,20 +1,17 @@
 
 from aiohttp import web
-import asyncio
 
 from .routes import setup_routes
 from .db import setup_db
 from .jinja_cfg import setup_jinja
+from settings import conf
 
 
-def create_app(_conf, loop=None):
+def create_app(**kwargs):
 
-    if not loop:
-        loop = asyncio.get_event_loop()
+    app = web.Application(**kwargs)
 
-    app = web.Application(loop=loop)
-
-    app["config"] = _conf
+    app["config"] = conf
     setup_jinja(app)
     setup_db(app)
     setup_routes(app)

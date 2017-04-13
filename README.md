@@ -18,6 +18,13 @@ Run
 
 Testing
 ___
-    $ pytest tests/unit/*.py
-    $ pytest tests/integration/*.py
-    $ tox -e pep8
+    $ pytest --pep8
+    $ pytest
+    
+        OR
+        
+    $ tox
+        # That conists of:
+        $ tox -e pep8
+        $ tox -e integration-tests
+        $ tox -e unit-tests

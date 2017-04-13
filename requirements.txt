@@ -14,10 +14,6 @@ packaging==16.8
 psycopg2==2.7.1
 py==1.4.33
 pyparsing==2.2.0
-pytest==3.0.7
-pytest-aiohttp==0.1.3
-pytest-cache==1.0
-pytest-pep8==1.0.6
 PyYAML==3.12
 six==1.10.0
 SQLAlchemy==1.1.8

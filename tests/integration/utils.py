@@ -24,41 +24,6 @@ test_db_url = "{_e}://{user}:{passw}@{host}:{port}/{db_name}".format(
 )
 
 
-def setup_fake_db(_e, conf, test_db_name):
-
-    psql_url = "{_e}://{user}:{passw}@{host}:{port}".format(
-        _e=_e,
-        user=conf.database["user"],
-        passw=conf.database["password"],
-        host=conf.database["host"],
-        port=conf.database["port"],
-    )
-    test_db_url = psql_url + "/{}".format(
-        test_db_name
-    )
-
-    psql_engine = create_engine(psql_url)
-    conn = psql_engine.connect()
-    conn.execute("commit")  # end the transaction
-    conn.execute("DROP DATABASE IF EXISTS {db_name};".format(
-        db_name=test_db_name
-    ))
-    conn.execute("commit")  # end the transaction
-    conn.execute("CREATE DATABASE {db_name};".format(
-        db_name=test_db_name
-    ))
-    conn.close()
-
-    engine = create_engine(
-        test_db_url,
-        echo=False,
-        pool_size=100,
-        max_overflow=200
-    )
-
-    return engine
-
-
 def fill_db():
     # engine
     e = create_engine(
@@ -138,4 +103,4 @@ class MetaServerTestCases(AioHTTPTestCase):
         cls.mock_session.stop()
 
     def get_app(self):
-        return create_app(conf, loop=self.loop)
+        return create_app()

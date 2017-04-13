@@ -10,6 +10,5 @@ before_script:
   - psql < sql/create_tables.sql -U postgres
 # command to run tests
 script:
-  - pytest
-  - tox -e pep8
+  - tox
 

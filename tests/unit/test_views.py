@@ -1,12 +1,11 @@
 """Unit Tests"""
 
 from polls.main import create_app
-from settings import conf
 
 
 async def test_home_view(loop, test_client):
 
-    app = create_app(conf, loop)
+    app = create_app()
 
     client = await test_client(app)
 
@@ -19,7 +18,7 @@ async def test_home_view(loop, test_client):
 
 async def test_questions_view(loop, test_client):
 
-    app = create_app(conf, loop)
+    app = create_app()
 
     client = await test_client(app)
 
@@ -33,7 +32,7 @@ async def test_questions_view(loop, test_client):
 
 async def test_chices_view(loop, test_client):
 
-    app = create_app(conf, loop)
+    app = create_app()
 
     client = await test_client(app)
 
