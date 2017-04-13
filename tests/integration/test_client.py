@@ -13,6 +13,7 @@ class ClientTestCases(MetaServerTestCases):
         """Check Home Page"""
         resp = await self.client.get("/")
 
+        # Check response
         self.assertEqual(200, resp.status)
         text = await resp.text()
         self.assertIn("How is there?", text)
@@ -22,19 +23,22 @@ class ClientTestCases(MetaServerTestCases):
         """Check Questions Page"""
         resp = await self.client.get("/questions")
 
+        date_on_page = (datetime.now() - timedelta(days=3)
+                        ).strftime("%Y-%m-%d")
+        date_not_on_page = (datetime.now() - timedelta(days=7)
+                            ).strftime("%Y-%m-%d")
+
+        # Check response
         self.assertEqual(200, resp.status)
         text = await resp.text()
-        # Check header
+        # Check header availability
         self.assertIn("Question Text", text)
         self.assertIn("Publication Date", text)
-        # Check fake content
-        self.assertIn("Mega Psam", text)            # Text on the page
-        self.assertNotIn("Mega Psam 1", text)       # Text not on the page
-        date_on_page = (
-            datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
-        date_not_on_page = (
-            datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
+        # Check fake content availability
+        self.assertIn("Mega Psam", text)
         self.assertIn(date_on_page, text)
+        # Check fake content absence
+        self.assertNotIn("Mega Psam 1", text)
         self.assertNotIn(date_not_on_page, text)
 
     @unittest_run_loop
@@ -42,12 +46,15 @@ class ClientTestCases(MetaServerTestCases):
         """Check Choices Page"""
         resp = await self.client.get("/choices")
 
+        # Check response
         self.assertEqual(200, resp.status)
+
         text = await resp.text()
-        # Check header
+        # Check header availability
         self.assertIn("Question ID", text)
         self.assertIn("Choice Text", text)
         self.assertIn("Votes", text)
-        # Check fake content
-        self.assertIn("Spam_Choice_789", text)      # Text on the page
-        self.assertNotIn("Spam_Choice_788", text)   # Text not on the page
+        # Check fake content availability
+        self.assertIn("Spam_Choice_789", text)
+        # Check fake content absence
+        self.assertNotIn("Spam_Choice_788", text)

@@ -15,6 +15,8 @@ class DbTestCases(MetaServerTestCases):
         s = polls.db.Session()
         q = s.query(polls.models.Question)
         penault_question = q.get(5)
+
+        # Check Availability
         self.assertIsNotNone(penault_question)
 
     @unittest_run_loop
@@ -23,6 +25,8 @@ class DbTestCases(MetaServerTestCases):
         s = polls.db.Session()
         c = s.query(polls.models.Choice)
         penault_choice = c.get(3)
+
+        # Check Availability
         self.assertIsNotNone(penault_choice)
 
     @unittest_run_loop
@@ -38,7 +42,9 @@ class DbTestCases(MetaServerTestCases):
         s.commit()
 
         q_after = q.count()
-        self.assertGreater(q_after, q_before)
+
+        # Check Incremented records number
+        self.assertEqual(q_after, q_before + 1)
 
     @unittest_run_loop
     async def test_choice_insert(self):
@@ -54,4 +60,6 @@ class DbTestCases(MetaServerTestCases):
         s.commit()
 
         c_after = c.count()
-        self.assertGreater(c_after, c_before)
+
+        # Check Incremented records number
+        self.assertEqual(c_after, c_before + 1)
