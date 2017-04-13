@@ -1,4 +1,4 @@
-"""Integration Tests"""
+"""Integration Tests Utils"""
 from datetime import datetime, timedelta
 from unittest import mock
 
@@ -40,15 +40,15 @@ def fill_db():
         ("Spam", datetime.now()),
         ("Spam", datetime.now() - timedelta(days=1)),
         ("Spam", datetime.now() - timedelta(days=2)),
-        ("Psam", datetime.now() - timedelta(days=3)),
-        ("Psam", datetime.now() - timedelta(days=4)),
+        ("Mega Psam", datetime.now() - timedelta(days=3)),
+        ("Right Psam Check", datetime.now() - timedelta(days=4)),
         ("Psam", datetime.now() - timedelta(days=5)),
     )
     choices = (
-        (1, "Spam Choice", 3),
-        (2, "Spam Choice", 7),
-        (3, "Spam Choice", 23),
-        (4, "Spam Choice", 983),
+        (1, "Spam Choice 007", 3),
+        (2, "Spam_Choice_789", 7),
+        (3, "Right Spam Choice 10", 23),
+        (4, "Spam Choice Oooo", 983),
     )
     Base.metadata.drop_all(e)
     Base.metadata.create_all(e)
@@ -103,4 +103,8 @@ class MetaServerTestCases(AioHTTPTestCase):
         cls.mock_session.stop()
 
     def get_app(self):
-        return create_app()
+        # Switch Original_Db to Fake_Db
+        conf.database["database"] = test_db_name
+        app = create_app()
+        app["config"] = conf
+        return app

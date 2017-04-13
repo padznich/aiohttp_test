@@ -18,13 +18,8 @@ Run
 
 Testing
 ___
-    $ pytest --pep8
-    $ pytest
-    
-        OR
-        
     $ tox
         # That conists of:
         $ tox -e pep8
-        $ tox -e integration-tests
         $ tox -e unit-tests
+        $ tox -e integration-tests
