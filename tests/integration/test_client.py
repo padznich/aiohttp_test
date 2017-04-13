@@ -10,44 +10,44 @@ class ClientTestCases(MetaServerTestCases):
 
     @unittest_run_loop
     async def test_client_home(self):
-
+        """Check Home Page"""
         resp = await self.client.get("/")
 
-        assert 200 == resp.status
+        self.assertEqual(200, resp.status)
         text = await resp.text()
-        assert "How is there?" in text
+        self.assertIn("How is there?", text)
 
     @unittest_run_loop
     async def test_client_questions_page(self):
-
+        """Check Questions Page"""
         resp = await self.client.get("/questions")
 
-        assert 200 == resp.status
+        self.assertEqual(200, resp.status)
         text = await resp.text()
         # Check header
-        assert "Question Text" in text
-        assert "Publication Date" in text
+        self.assertIn("Question Text", text)
+        self.assertIn("Publication Date", text)
         # Check fake content
-        assert "Mega Psam" in text           # Text on the page
-        assert "Mega Psam 1" not in text     # Text not on the page
+        self.assertIn("Mega Psam", text)            # Text on the page
+        self.assertNotIn("Mega Psam 1", text)       # Text not on the page
         date_on_page = (
             datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
         date_not_on_page = (
             datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
-        assert date_on_page in text
-        assert date_not_on_page not in text
+        self.assertIn(date_on_page, text)
+        self.assertNotIn(date_not_on_page, text)
 
     @unittest_run_loop
     async def test_client_choices_page(self):
-
+        """Check Choices Page"""
         resp = await self.client.get("/choices")
 
-        assert 200 == resp.status
+        self.assertEqual(200, resp.status)
         text = await resp.text()
         # Check header
-        assert "Question ID" in text
-        assert "Choice Text" in text
-        assert "Votes" in text
+        self.assertIn("Question ID", text)
+        self.assertIn("Choice Text", text)
+        self.assertIn("Votes", text)
         # Check fake content
-        assert "Spam_Choice_789" in text        # Text on the page
-        assert "Spam_Choice_788" not in text    # Text not on the page
+        self.assertIn("Spam_Choice_789", text)      # Text on the page
+        self.assertNotIn("Spam_Choice_788", text)   # Text not on the page
