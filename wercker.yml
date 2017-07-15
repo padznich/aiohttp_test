@@ -1,6 +1,4 @@
-box: 
-   id: python:3.5
-   cmd: /bin/sh
+box: python:3.5
 services:
    - id: postgres
      env:
@@ -15,7 +13,7 @@ build:
     - script:
         name: echo python information
         code: |
-          echo "python version $(python --version) running"
+          python --version
     
     - script:          
         name: run unit tests
