@@ -22,4 +22,5 @@ pytest-pep8==1.0.6
 PyYAML==3.12
 six==1.10.0
 SQLAlchemy==1.1.8
+tox==2.7.0
 yarl==0.10.0
