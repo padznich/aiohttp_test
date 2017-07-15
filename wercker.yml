@@ -18,7 +18,7 @@ build:
     - script:        
         name: run unit tests
         code: |
-          pytest -v --pep8
+          tox -e pep8
     
     - script:          
         name: extension test
