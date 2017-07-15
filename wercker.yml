@@ -7,16 +7,11 @@ services:
        POSTGRES_USER: postgres
 build:
   steps:
-    - script:
-        name: install virtualenv
-        code: |
-          pip install virtualenv
+  
+    - virtualenv:
+      name: venv
     
-        name: setup/activate virtualenv using 3.5
-        code: |
-          virtualenv -p /usr/local/bin/python3 /tmp/venv3
-          source /tmp/venv3/bin/activate
-
+    - script:
         name: pip install
         code: |
           pip install --download-cache=$WERCKER_CACHE_DIR -r requirements.txt
