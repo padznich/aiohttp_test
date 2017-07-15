@@ -1,0 +1,33 @@
+box: python:3.5
+services:
+   - id: postgres
+     env:
+       POSTGRES_DB: postgres
+       POSTGRES_PASSWORD: postgres
+       POSTGRES_USER: postgres
+build:
+  steps:
+    - virtualenv:
+        name: setup virtual environment
+        python_location: /usr/bin/python3
+        install_wheel: false
+        
+    - pip-install
+    
+    - script:
+        name: echo python information
+        code: |
+          echo "python version $(python --version) running"
+          
+        name: run unit tests
+        code: |
+          pytest -v
+        
+        name: run unit tests
+        code: |
+          pytest -v --pep8
+          
+        name: extension test
+        code: |
+          sudo -u postgres psql postgres < polls/sql/init_db.sql
+          sudo -u postgres psql postgres -d polls < polls/sql/create_tables.sql
