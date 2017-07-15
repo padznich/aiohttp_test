@@ -1,4 +1,6 @@
-box: python:3.5
+box: 
+   id: python:3.5
+   cmd: /bin/sh
 services:
    - id: postgres
      env:
@@ -10,19 +12,22 @@ build:
     - pip-install:
         requirements_file: "requirements.txt"
     
-    - script:    
+    - script:
         name: echo python information
         code: |
           echo "python version $(python --version) running"
-          
+    
+    - script:          
         name: run unit tests
         code: |
           pytest -v
-        
+    
+    - script:        
         name: run unit tests
         code: |
           pytest -v --pep8
-          
+    
+    - script:          
         name: extension test
         code: |
           sudo -u postgres psql postgres < polls/sql/init_db.sql
