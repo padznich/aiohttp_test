@@ -6,12 +6,11 @@ services:
        POSTGRES_PASSWORD: postgres
        POSTGRES_USER: postgres
 build:
-  steps:   
-    - script:
-        name: pip install
-        code: |
-          pip install --download-cache=$WERCKER_CACHE_DIR -r requirements.txt
+  steps:
+    - pip-install:
+        requirements_file: "requirements.txt"
     
+    - script:    
         name: echo python information
         code: |
           echo "python version $(python --version) running"
