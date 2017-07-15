@@ -10,12 +10,12 @@ build:
     - script:
         name: install virtualenv
         code: |
-          sudo pip install virtualenv
+          pip install virtualenv
     
         name: setup/activate virtualenv using 3.5
         code: |
-            virtualenv -p /usr/local/bin/python3 /tmp/venv3
-            source /tmp/venv3/bin/activate
+          virtualenv -p /usr/local/bin/python3 /tmp/venv3
+          source /tmp/venv3/bin/activate
 
         name: pip install
         code: |
