@@ -39,5 +39,5 @@ build:
     - script:
       name: init DB
       code: |
-        sudo -u postgres psql < polls/sql/init_db.sql
-        sudo -u postgres psql -d postgres < polls/sql/create_tables.sql
+        psql -Upostgres < polls/sql/init_db.sql
+        psql -Upostgres -dpostgres < polls/sql/create_tables.sql
