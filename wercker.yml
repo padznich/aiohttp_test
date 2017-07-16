@@ -1,10 +1,11 @@
 box: python:3.5
 services:
-  - id: postgres
-    env:
-      POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
+  - wercker/postgresql
+#  - id: postgres
+#    env:
+#      POSTGRES_DB: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_USER: postgres
 build:
   steps:
     - pip-install:
