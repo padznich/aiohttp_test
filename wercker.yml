@@ -16,12 +16,16 @@ build:
           python --version
     
     - script:        
-        name: run unit tests
+        name: run pep8 tests
         code: |
           tox -e pep8
     
     - script:          
-        name: extension test
+        name: init DB
         code: |
-          sudo -u postgres psql postgres < polls/sql/init_db.sql
-          sudo -u postgres psql postgres -d polls < polls/sql/create_tables.sql
+          sudo -u $POSTGRES_USER psql -p $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
+
+    - script:
+        name: create tables
+        code: |
+          sudo -u $POSTGRES_USER psql -p $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/create_tables.sql
