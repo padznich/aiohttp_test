@@ -21,9 +21,11 @@ build:
         tox -e pep8
     
     - script:          
-      name: echo ls -l
+      name: echo postgres url
       code: |
-        ls -l
+        echo '------------'
+        echo $WERCKER_POSTGRESQL_URL
+        echo '------------'
 
     - script:
       name: echo services
