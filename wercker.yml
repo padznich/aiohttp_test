@@ -21,6 +21,16 @@ build:
           tox -e pep8
     
     - script:          
+        name: echo ls -l
+        code: |
+          ls -l
+
+    - script:
+        name: echo services
+        code: |
+          service --status-all
+
+    - script:
         name: echo psql version
         code: |
           psql --version
