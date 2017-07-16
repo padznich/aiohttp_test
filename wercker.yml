@@ -1,46 +1,48 @@
 box: python:3.5
 services:
-   - id: postgres
-     env:
-       POSTGRES_DB: postgres
-       POSTGRES_PASSWORD: postgres
-       POSTGRES_USER: postgres
+  - name: postgres_1
+    id: aiohttp_test/postgres
+    env:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    cmd: postgresql start
 build:
   steps:
     - pip-install:
-        requirements_file: "requirements.txt"
+      requirements_file: "requirements.txt"
     
     - script:
-        name: echo python information
-        code: |
-          python --version
+      name: echo python information
+      code: |
+        python --version
     
     - script:        
-        name: run pep8 tests
-        code: |
-          tox -e pep8
+      name: run pep8 tests
+      code: |
+        tox -e pep8
     
     - script:          
-        name: echo ls -l
-        code: |
-          ls -l
+      name: echo ls -l
+      code: |
+        ls -l
 
     - script:
-        name: echo services
-        code: |
-          service --status-all
+      name: echo services
+      code: |
+        service --status-all
 
     - script:
-        name: echo psql version
-        code: |
-          psql --version
+      name: echo psql version
+      code: |
+        psql --version
 
     - script:
-        name: init DB
-        code: |
-          psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
+      name: init DB
+      code: |
+        psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
 
     - script:
-        name: create tables
-        code: |
-          psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/create_tables.sql
+      name: create tables
+      code: |
+        psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/create_tables.sql
