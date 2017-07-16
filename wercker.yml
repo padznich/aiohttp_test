@@ -1,7 +1,7 @@
 box: python:3.5
 services:
   - name: postgres_1
-    id: aiohttp_test/postgres
+    id: wercker/postgres
     env:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
