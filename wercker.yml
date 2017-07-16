@@ -21,6 +21,11 @@ build:
           tox -e pep8
     
     - script:          
+        name: echo psql version
+        code: |
+          psql --version
+
+    - script:
         name: init DB
         code: |
           psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
