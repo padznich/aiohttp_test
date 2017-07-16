@@ -23,9 +23,9 @@ build:
     - script:          
         name: init DB
         code: |
-          sudo -u $POSTGRES_USER psql -p $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
+          psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
 
     - script:
         name: create tables
         code: |
-          sudo -u $POSTGRES_USER psql -p $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/create_tables.sql
+          psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/create_tables.sql
