@@ -26,6 +26,10 @@ build:
       name: echo services
       code: |
         service --status-all
+        echo '========================'
+        service postgresql start
+        echo '========================'
+        service --status-all
 
     - script:
       name: echo psql version
@@ -35,9 +39,5 @@ build:
     - script:
       name: init DB
       code: |
-        psql -U postgres -W postgres < polls/sql/init_db.sql
-
-    - script:
-      name: create tables
-      code: |
-        psql -U postgres -W postgres -d postgres < polls/sql/create_tables.sql
+        sudo -u postgres psql < polls/sql/init_db.sql
+        sudo -u postgres psql -d postgres < polls/sql/create_tables.sql
