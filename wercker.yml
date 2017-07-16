@@ -1,12 +1,10 @@
 box: python:3.5
 services:
-  - name: postgres_1
-    id: wercker/postgres
+  - id: postgres
     env:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-    cmd: postgresql start
 build:
   steps:
     - pip-install:
@@ -40,9 +38,10 @@ build:
     - script:
       name: init DB
       code: |
-        psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
+        psql -U postgres -W postgres -d postgres < polls/sql/init_db.sql
+#        psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
 
     - script:
       name: create tables
       code: |
-        psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/create_tables.sql
+        psql -U postgres -W postgres -d postgres < polls/sql/create_tables.sql
