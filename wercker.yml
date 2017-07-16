@@ -1,13 +1,14 @@
 box: python:3.5
 services:
-  - wercker/postgresql
-#  - id: postgres
-#    env:
-#      POSTGRES_DB: postgres
-#      POSTGRES_PASSWORD: postgres
-#      POSTGRES_USER: postgres
+   - id: postgres
+     env:
+       POSTGRES_PASSWORD: postgres
+       POSTGRES_USER: postgres
 build:
   steps:
+  - install-packages:
+        packages: postgresql postgresql-contrib
+
     - pip-install:
       requirements_file: "requirements.txt"
     
@@ -20,13 +21,6 @@ build:
       name: run pep8 tests
       code: |
         tox -e pep8
-    
-    - script:          
-      name: echo postgres url
-      code: |
-        echo '------------'
-        echo $WERCKER_POSTGRESQL_URL
-        echo '------------'
 
     - script:
       name: echo services
@@ -41,8 +35,7 @@ build:
     - script:
       name: init DB
       code: |
-        psql -U postgres -W postgres -d postgres < polls/sql/init_db.sql
-#        psql -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d $POSTGRES_DB < polls/sql/init_db.sql
+        psql -U postgres -W postgres < polls/sql/init_db.sql
 
     - script:
       name: create tables
